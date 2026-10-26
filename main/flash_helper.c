@@ -64,6 +64,14 @@ static bool perform_mmap(int ind) {
 	return m_code_checks[ind].mmap_done;
 }
 
+void flash_helper_init(void) {
+	// Map the code partitions before anything else maps flash. The mapping address depends on
+	// which pages are already in use, and LispBM images are only valid at the address they
+	// were created at.
+	perform_mmap(CODE_IND_LISP);
+	perform_mmap(CODE_IND_QML);
+}
+
 static void code_check(int ind) {
 	if (m_code_checks[ind].check_done) {
 		return;

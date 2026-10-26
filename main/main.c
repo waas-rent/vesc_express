@@ -82,6 +82,8 @@ void app_main(void) {
 		ret = nvs_flash_init();
 	}
 
+	flash_helper_init();
+
 	{
 		nvs_handle_t my_handle;
 		nvs_open("vesc", NVS_READONLY, &my_handle);
